@@ -2,7 +2,7 @@
   <img src="assets/banner.png" alt="AI Competency Framework: defining what AI competency means for university students, and measuring it from their real LLM conversations." width="100%">
 </p>
 
-AI can now write a polished essay or solve a hard problem in seconds, so finished work says much less than it used to about what a student actually knows. Nearly every student uses these tools, but using AI is not the same as using it well. The question for universities is whether students are using AI to think better or to avoid thinking, and today they have little evidence either way.
+AI can now write a polished essay or solve a hard problem in seconds, so finished work says much less than it used to about what a student actually knows. These tools are now widespread among students, but using AI is not the same as using it well. The question for universities is whether students are using AI to think better or to avoid thinking, and today they have little evidence either way.
 
 Most AI literacy frameworks describe what students should know, or ask them how confident they feel. Neither shows what a student can actually do with AI when learning something new or creating real work. This project tries to close that gap in two ways:
 
