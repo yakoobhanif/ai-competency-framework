@@ -1,6 +1,6 @@
 # AI Capability Quiz
 
-Version: `capability_quiz_v2.2` (approved 25-question scenario baseline)
+Version: `capability_quiz_v2.3` (approved 25-question scenario baseline)
 
 Status: Approved wording and fixed scoring key for initial piloting; not a validated psychometric scale.
 
@@ -9,6 +9,8 @@ Framework: AI Competency Framework v3.0; self-assessment v2.6.
 This is Part 2 of the assessment: conceptual knowledge and judgement in written scenarios. It follows self-assessment and precedes practical tasks. It contains one question for each of the 25 capabilities. **Distribute only Part A to students. Keep Parts B and C out of student-facing files, browser bundles and AI-assistant context.**
 
 Version 2.2 implements the final questions, options and scores approved in the platform review. It replaces the 35-question version, renumbers items in capability order, and uses binary scoring throughout, including R3/R4. Existing answers must not be relabelled across versions.
+
+Version 2.3 rewrites answer options so the four options in each question are similar in length and the best answer does not stand out by being longer or more qualified. Absolute wording such as “always” and “necessarily” is removed from distractors. Questions, the best answer to each question and the scoring key are unchanged.
 
 ## Part A. Student Quiz
 
@@ -32,7 +34,7 @@ A. It finds the training photograph closest to the new one and copies its label 
 
 B. During training, it learned patterns associated with the labels and uses those patterns to make a prediction.
 
-C. The labels gave it a complete definition of each animal, allowing it to identify every new example correctly.
+C. The labels gave it a full definition of each animal, which it checks against the new photograph.
 
 D. It adds the new photograph to its training data and learns the correct label before making its prediction.
 
@@ -51,13 +53,13 @@ Review labels:
 
 AI has been useful for improving your essays. You now ask it about a topic you know little about, and its answer sounds convincing. Which judgement is most reasonable?
 
-A. A clear explanation is a good reason to trust the answer, even if you cannot assess the subject yourself.
+A. A clear explanation is a good reason to trust the answer, even on a subject you cannot judge yourself.
 
-B. Getting the same answer in several new conversations would be enough to confirm it.
+B. Getting the same answer in several new conversations would show that the answer is accurate.
 
 C. Asking it to answer as a subject expert would make the response reliable enough to use.
 
-D. Being good at editing does not establish that it knows this subject; the answer needs checking before you rely on it.
+D. Its skill at editing says little about this subject, so check the answer before relying on it.
 
 Answer: **A / B / C / D**
 
@@ -74,9 +76,9 @@ Review labels:
 
 You have 800 survey responses, each with a faculty name and a written comment. You need recurring themes and exact response counts by faculty. Your approved AI tool can read text but cannot run calculations. Which workflow fits best?
 
-A. Ask AI for both outputs and accept its counts after checking ten responses by hand.
+A. Ask AI for both outputs and accept its counts once you have checked ten responses by hand.
 
-B. Calculate faculty totals in a spreadsheet and treat the most frequent words as a complete account of the themes.
+B. Calculate faculty totals in a spreadsheet and use the most frequent words to describe the themes.
 
 C. Calculate faculty totals in a spreadsheet, use AI to suggest themes, and check those themes against the comments.
 
@@ -97,13 +99,13 @@ Review labels:
 
 You ask AI to assess your essay using your course’s marking rubric. You provide the essay and assignment brief, but the rubric is on a private course page you have not shared. The AI gives a detailed score. How should you interpret it?
 
-A. Its comments may provide general feedback, but the score is not grounded in the actual rubric; share the rubric before asking for that assessment.
+A. Its comments may help, but the score is not based on the actual rubric, so share it first.
 
-B. The detailed score indicates that it recognized the course’s rubric from the assignment brief.
+B. The level of detail in the score suggests it recognized the course’s rubric from the brief.
 
-C. Giving it the course name and lecturer’s name would allow it to reconstruct the private rubric accurately.
+C. Adding the course name and lecturer’s name would let it reconstruct the private rubric accurately.
 
-D. If another AI gives a similar score, that would confirm that both assessed the essay against the actual rubric.
+D. If another AI gives a similar score, that confirms both assessed the essay against the actual rubric.
 
 Answer: **A / B / C / D**
 
@@ -170,7 +172,7 @@ A. It uses values to score the relevance of keys, then combines query representa
 
 B. It slides a learned filter over fixed groups of neighbouring tokens, then pools the resulting features.
 
-C. It calculates how strongly available tokens should contribute to a token’s representation, then combines their information using those weights.
+C. It scores how relevant available tokens are to a token, then combines their information using those weights.
 
 D. It starts with a noisy representation and repeatedly predicts and removes noise to recover the text.
 
@@ -189,13 +191,13 @@ Review labels:
 
 An LLM-based university assistant gives an outdated policy answer. Its search tool found the current policy, but the system passed an older saved passage to the LLM. What would address the problem most directly?
 
-A. Replace the LLM with a larger model, while keeping the same passages and information flow.
+A. Replace the LLM with a larger model, keeping the same passages and the same flow of information.
 
-B. Fix how retrieved information is selected and passed to the LLM, then check that the current passage reaches it.
+B. Fix how retrieved passages are selected and passed to the LLM, then check the current one arrives.
 
-C. Tell the LLM to use the latest policy, without changing the older passage it receives.
+C. Instruct the LLM to use the latest policy, while it keeps receiving the same older passage.
 
-D. Add a checking step in which the same LLM reviews its answer against the older passage.
+D. Add a step where the same LLM reviews its answer against the older passage it was given.
 
 Answer: **A / B / C / D**
 
@@ -212,13 +214,13 @@ Review labels:
 
 You ask an AI assistant to find a suitable meeting time. It checks calendars, finds no common slot, asks about flexibility and searches again. What best explains this behaviour?
 
-A. It uses information returned by its tools to decide what to do next, rather than following an unchanged sequence of steps.
+A. It uses what its tools return to decide its next step, instead of following a fixed script.
 
-B. It must have been given a separate, prewritten instruction for every possible calendar conflict.
+B. It was given a separate, prewritten instruction for each type of calendar conflict it might meet.
 
-C. Reading the calendars retrains the underlying model, giving it the knowledge needed for its next action.
+C. Reading the calendars retrains the underlying model, giving it the knowledge it needs for the next step.
 
-D. Once connected to calendars, it can decide which access restrictions to override to complete the task.
+D. Once connected to the calendars, it can decide which access restrictions to override to finish the task.
 
 Answer: **A / B / C / D**
 
@@ -235,13 +237,13 @@ Review labels:
 
 While studying with AI, you notice that you can solve problems when told which formula to use, but often choose the wrong formula when questions are worded differently. Which learning goal best addresses this difficulty?
 
-A. Memorize the formulas more thoroughly so you can recall them faster under exam conditions.
+A. Memorize the formulas more thoroughly so you can recall each one faster under exam conditions.
 
-B. Practise calculations using each formula until you can complete the arithmetic without mistakes.
+B. Practise calculations with each formula until you can do the arithmetic quickly and without mistakes.
 
-C. Learn to identify which features of a problem determine the method, and explain your choice before calculating.
+C. Learn which features of a problem decide the method, and explain your choice before calculating.
 
-D. Read more complete solutions and aim to recognize which familiar example each new question resembles.
+D. Read more worked solutions so you can recognize which familiar example each new question resembles.
 
 Answer: **A / B / C / D**
 
@@ -258,13 +260,13 @@ Review labels:
 
 You study a topic with AI and answer questions correctly immediately afterwards. Two days later, you struggle to answer similar questions without help. How should you adjust your study approach?
 
-A. Test yourself without hints one or two days after studying, use the mistakes to identify what needs attention, and revisit those parts.
+A. Test yourself without hints a day or two later, and use your mistakes to decide what to revisit.
 
-B. Reread the AI’s explanation before each practice attempt so you can maintain a high success rate.
+B. Reread the AI’s explanation before each practice attempt so that you keep getting most answers right.
 
-C. Repeat the original questions immediately until they feel easy, then use that result to decide whether the topic is secure.
+C. Repeat the original questions straight away until they feel easy, and take that as a sign you know it.
 
-D. Ask AI for more detailed notes and postpone further testing until the notes cover every part of the topic.
+D. Ask AI for more detailed notes, and wait to test yourself until they cover the whole topic.
 
 Answer: **A / B / C / D**
 
@@ -327,9 +329,9 @@ Review labels:
 
 Your student society wants a poster encouraging first-year students to register for a free careers workshop. Which brief gives AI the clearest direction for an effective poster?
 
-A. “Create an informative A4 poster explaining career planning, with industry trends and detailed speaker biographies.”
+A. “Create an informative A4 poster about career planning, covering industry trends and full biographies of each speaker.”
 
-B. “Create an A4 poster for first-year students showing the workshop’s benefits, date and location, with a clear registration link or QR code.”
+B. “Create an A4 poster for first-year students with the workshop’s benefits, date, location and registration link.”
 
 C. “Create a professional A4 poster that emphasizes our society’s achievements and uses the university’s colours and branding.”
 
@@ -350,13 +352,13 @@ Review labels:
 
 Two students are using AI to recommend an event for their student society. They have a survey of members’ event preferences and a list of possible venues. Some survey responses are duplicates, and venue prices need confirming. The recommendation must balance member interest with the budget. Which plan handles the work best?
 
-A. One checks the survey while the other confirms prices. AI can outline the slides meanwhile, then compare options using the checked information. Both review the recommendation.
+A. One removes duplicate survey responses and the other confirms prices while AI drafts slides. AI then compares options, and both review.
 
-B. AI chooses an event first. One student corrects the survey and the other updates prices, but they keep the choice unless it exceeds the budget.
+B. AI chooses an event first. They then fix the survey and update prices, keeping the choice unless it exceeds the budget.
 
-C. One student chooses the cheapest venue. The other asks AI to use the survey to explain why members would enjoy that option.
+C. One student picks the cheapest venue. The other asks AI to use the survey to explain why members would enjoy it.
 
-D. One student ranks events by popularity and the other by price. AI uses whichever ranking shows the clearest winner.
+D. One student ranks events by popularity, the other by price, and AI goes with whichever ranking shows a clearer winner.
 
 Answer: **A / B / C / D**
 
@@ -379,7 +381,7 @@ B. Give both reports and ask AI to fill in any missing costs using typical stude
 
 C. Remove accommodation and meals from A’s figure, compare tuition alone, and ask AI to describe the result as the overall cost comparison.
 
-D. Give each figure with its source, date and what it covers; identify the missing costs and keep any estimates clearly separate from confirmed amounts.
+D. Give each figure with its source, date and what it covers, and keep estimates for missing costs clearly separate.
 
 Answer: **A / B / C / D**
 
@@ -396,11 +398,11 @@ Review labels:
 
 AI helps you draft an interview-based assignment. The draft says a company requires employees to work at weekends. The interviewee clarifies that they were describing their own voluntary practice, not company policy. What is the best revision?
 
-A. Correct the interview quotation, leaving the assignment’s summary and argument unchanged.
+A. Correct the interview quotation, but leave the assignment’s summary and its argument as they are.
 
 B. Keep the company-policy claim but add a note that interviewees’ views may be personal.
 
-C. Correct the claim wherever it appears and revise any argument that depended on it being company policy.
+C. Correct the claim throughout and revise any argument that relied on it being company policy.
 
 D. Ask AI to change “requires” to “encourages,” keeping the company-policy framing with softer wording.
 
@@ -419,13 +421,13 @@ Review labels:
 
 You use AI to turn your research report into a five-minute class presentation. The slides look professional, and you have checked that every quoted number and citation matches the report. What is the most useful final check before presenting?
 
-A. Confirm that the slides use consistent fonts and colours; matching numbers and citations already establishes that the content is faithful to the report.
+A. Check that fonts and colours are consistent, since matching numbers and citations show the content is faithful.
 
-B. Present the final slides aloud, checking that headings and charts preserve the report’s meaning, explanations are understandable and the presentation fits five minutes.
+B. Rehearse aloud, checking that headings and charts keep the report’s meaning, explanations are clear and timing fits.
 
-C. Add a link to the full report so the audience can resolve any missing explanations or qualifications themselves.
+C. Add a link to the full report so the audience can look up any missing explanations or caveats.
 
-D. Ask AI to rate the slides against the assignment brief and treat a positive assessment as confirmation that they are ready.
+D. Ask AI to rate the slides against the assignment brief, and treat a good rating as confirmation they are ready.
 
 Answer: **A / B / C / D**
 
@@ -442,13 +444,13 @@ Review labels:
 
 You want an AI agent to use a publicly shared skill to format your presentation. The skill contains instructions and a script that reads project files. What should happen before it works on your presentation?
 
-A. Review the script for unsafe code, treating the written instructions as harmless because they are not executable code.
+A. Review the script for unsafe code; the written instructions are not executable, so they can be trusted.
 
-B. Check the instructions and code for attempts to redirect the task, expose data or gain extra access; then test a copy with only the permissions needed.
+B. Check the instructions and code for hidden directions or data exposure, then test on a copy with minimal access.
 
-C. Limit access to the project folder and test on a copy, trusting the skill’s instructions without checking for unrelated or hidden directions.
+C. Limit access to the project folder and test on a copy, but trust the skill’s written instructions as given.
 
-D. Tell the agent to ignore malicious instructions, then run the skill with normal access because that warning provides the necessary protection.
+D. Tell the agent to ignore any malicious instructions, and then let it run the skill with its normal access.
 
 Answer: **A / B / C / D**
 
@@ -465,13 +467,13 @@ Review labels:
 
 An AI cites a study to support an important claim in your assignment. What is the best way to check whether the study actually supports that claim?
 
-A. Find the study, read the relevant findings and compare what it examined and found with the claim.
+A. Find the study, read the relevant findings, and compare what it examined and found with the claim.
 
 B. Ask the same AI to confirm that the reference is genuine and explain its answer again.
 
-C. Check that the reference has a realistic title, named authors and a publication date.
+C. Check that the reference has a realistic title, named authors and a plausible publication date.
 
-D. Find another AI response that makes the same claim and cites the same study.
+D. Look for another AI response that makes the same claim and also cites the same study.
 
 Answer: **A / B / C / D**
 
@@ -488,13 +490,13 @@ Review labels:
 
 Two AI tools receive the same 100 questions. Tool A answers all of them and gets 80 right. Tool B answers 40, gets 38 right and declines the other 60. A review calls B “more capable” because its accuracy is 95%, compared with A’s 80%. How should you assess that claim?
 
-A. Accept it: the higher percentage correct establishes that B is more capable, regardless of which questions it declined.
+A. Accept it: B gets a higher share of its answers right, so it is the more capable tool.
 
-B. Reject it: A is necessarily more capable because answering more questions is better than refusing, even when some answers are wrong.
+B. Reject it: A answers every question, and answering is more useful than declining, even with some mistakes.
 
-C. Treat B’s refusals as successful responses because declining to answer is always safer than risking a mistake.
+C. Count B’s refusals as successes, because declining to answer is safer than risking a wrong answer.
 
-D. Examine the refusals: some may appropriately avoid unsupported answers, while others may avoid answerable questions. Weigh these alongside mistakes and useful answers for the intended task.
+D. Look at which questions B declined: some refusals may be sensible, others not. Then compare the tools.
 
 Answer: **A / B / C / D**
 
@@ -517,7 +519,7 @@ B. Add a separate “women in engineering” box, treating that addition as suff
 
 C. Add a disclaimer that AI may reproduce stereotypes, leaving readers to interpret the stories themselves.
 
-D. Revise the stories to show varied people across different roles, then review the whole guide for stereotyped portrayals.
+D. Revise the stories to show varied people in different roles, then check the whole guide for stereotypes.
 
 Answer: **A / B / C / D**
 
@@ -534,11 +536,11 @@ Review labels:
 
 Your course permits uploading interview excerpts to an approved AI service only if participants cannot be identified. You have removed names, but an excerpt still gives an exact job title, department and a distinctive workplace incident. What should you do?
 
-A. Upload it because removing names is sufficient to make the excerpt anonymous.
+A. Upload it as it is, since removing the names is enough to make the excerpt anonymous.
 
-B. Replace the job title with initials, keeping the department and incident so the AI has enough context.
+B. Replace the job title with initials, keeping the department and incident so the AI has context.
 
-C. Remove or generalize the identifying combination, check the remaining text, and share only the excerpts needed for the task.
+C. Remove or generalize the identifying details, recheck the text, and share only the excerpts you need.
 
 D. Use a temporary chat and tell the AI not to include identifying details in its response.
 
@@ -557,13 +559,13 @@ Review labels:
 
 Your assignment allows AI to help with structure and language, but the analysis must be your own. You ask AI to reorganize your notes. It adds a new interpretation of a source, which you keep after rewriting it in your own words. You have cited the source. What should you do before submitting?
 
-A. Disclose structural and language assistance only, because rewriting the interpretation makes it your own analysis.
+A. Disclose help with structure and language only, since rewriting the interpretation made it your own analysis.
 
-B. Rework the analysis so it is your own under the stated rules, and accurately explain what AI contributed rather than describing it as editing only.
+B. Redo that part of the analysis yourself, as the rules require, and describe accurately what AI contributed.
 
-C. Cite the AI beside the interpretation, because acknowledging its contribution makes that use permissible.
+C. Cite the AI next to the interpretation, because acknowledging where it came from makes the use allowed.
 
-D. Describe all the analysis as AI-generated, because a broader disclosure is safer than distinguishing the actual contributions.
+D. Describe all of the analysis as AI-generated, since a broader disclosure is safer than separating contributions.
 
 Answer: **A / B / C / D**
 
@@ -580,13 +582,13 @@ Review labels:
 
 You used AI to help prepare an article. Your checks support its main content, but an allegation about a named person remains unsupported. The allegation is not essential to the article. What should you do?
 
-A. Publish the article unchanged because most of its content passed your checks.
+A. Publish the article as it is, since most of its content has already passed your checks.
 
-B. Publish the allegation with a note that AI contributed, allowing readers to judge it themselves.
+B. Publish the allegation with a note that AI helped, so readers can judge it for themselves.
 
-C. Keep the allegation if the AI repeats it confidently after being asked to reconsider.
+C. Keep the allegation if the AI repeats it confidently after you ask it to reconsider the claim.
 
-D. Leave out the allegation unless suitable evidence or review supports it, and assess the rest of the article on its supported content.
+D. Leave out the allegation unless evidence supports it, and judge the rest of the article on its merits.
 
 Answer: **A / B / C / D**
 
@@ -763,7 +765,7 @@ These references support design or technical interpretation; they do not validat
 
 ### Administration
 
-Use capability_quiz_v2.2 and capability_quiz_key_v2.2 with self-assessment v2.6. Present only Part A, one question at a time, identically for both creation pathways. Allow approximately 20 minutes with a non-blocking timer and approved accommodations. With self-assessment and the two tasks, the core flow is approximately 65 minutes; practical-task buffer time remains separate.
+Use capability_quiz_v2.3 and capability_quiz_key_v2.3 with self-assessment v2.7. Present only Part A, one question at a time, identically for both creation pathways. Allow approximately 20 minutes with a non-blocking timer and approved accommodations. With self-assessment and the two tasks, the core flow is approximately 65 minutes; practical-task buffer time remains separate.
 
 Question order is shuffled once for each student and saved, so it stays the same across reloads. Option order stays fixed. Answers and scores always use the question ID, not the position. Save responses server-side, permit back-navigation before submission and require an explicit answer or Not sure for every item. Do not reveal the key before completion or let AI answer the quiz. Record any technical interruption separately; it is not a wrong answer. Freeze instrument versions and reject attempts from an incompatible version rather than silently mixing forms.
 

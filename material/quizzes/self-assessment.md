@@ -1,6 +1,6 @@
 # AI Competency Self-Assessment
 
-Version: `self_assessment_v2.6`
+Version: `self_assessment_v2.7`
 
 Status: Complete questionnaire for initial piloting; not a validated psychometric scale.
 
@@ -21,6 +21,8 @@ Version 2.4 implements the agreed 25-capability framework: U5-U9 and C6 are adde
 Version 2.5 removes question subtitles and the redundant Skip action. Each self-assessment question has one complete prompt, five ability ratings and Not sure. The wording and controls are identical in demo and live mode.
 
 Version 2.6 implements the approved wording review across all 25 questions and their answer descriptions. Domain transitions are explicit, middle ratings distinguish developing or inconsistent performance where appropriate, and U6 combines keeping up with AI developments with understanding their implications. The response labels, Not sure option and scoring are unchanged.
+
+Version 2.7 rebalances the answer descriptions so the five levels within each question are similar in length, and simplifies the longest higher-level descriptions. The meaning of each level, the response labels, Not sure option and scoring are unchanged.
 
 ## Part A. Student Questionnaire
 
@@ -60,7 +62,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 
 | Level | Description |
 | --- | --- |
-| 1 | I cannot explain how AI systems work. |
+| 1 | I cannot yet explain how AI systems learn or follow rules to do tasks. |
 | 2 | I can give a rough explanation, but I am unclear about the main steps. |
 | 3 | I can explain the main steps, but struggle to explain how they work together. |
 | 4 | I can give a clear, connected explanation of how it works. |
@@ -78,7 +80,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | 2 | I know AI can make mistakes, but struggle to explain when they are likely. |
 | 3 | I can describe some strengths and limitations, but struggle to relate them to a particular task. |
 | 4 | I can explain likely strengths and limitations for a task and what they mean for reliability. |
-| 5 | I can compare how reliable AI is likely to be across different tasks and conditions, explain why, and identify when its limitations make it unsuitable. |
+| 5 | I can compare AI’s reliability across tasks, explain why, and tell when its limits make it unsuitable. |
 
 #### U3. Choose an appropriate AI approach
 
@@ -107,7 +109,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | 2 | I can identify some information it may use, but am unsure what it actually has access to. |
 | 3 | I can explain the main information available, but may overlook important gaps or limits. |
 | 4 | I can explain what information an AI system has access to and identify important information it is missing. |
-| 5 | I can explain how missing or unreliable information affects its outputs and judge what additional context or grounding would improve them. |
+| 5 | I can explain how missing or unreliable information affects outputs, and what extra context would help. |
 
 #### U5. Recognize AI in everyday life
 
@@ -120,8 +122,8 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | 1 | I cannot yet identify where AI is likely to be used. |
 | 2 | I can name familiar AI products but struggle to distinguish AI from fixed automation. |
 | 3 | I can identify some everyday uses of AI, but cannot consistently distinguish them from conventional automation. |
-| 4 | I can explain why an everyday product or service likely uses AI rather than conventional automation, and recognize when I cannot be certain. |
-| 5 | I can use evidence about how a system works to judge whether it uses AI, and explain what further information would help when this is unclear. |
+| 4 | I can explain why a product likely uses AI rather than fixed rules, and say when I cannot be sure. |
+| 5 | I can judge from how a system works whether it uses AI, and what would help when it is unclear. |
 
 #### U6. Keep up with AI developments
 
@@ -135,7 +137,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | 2 | I occasionally hear about AI developments, but usually understand only the headlines. |
 | 3 | I sometimes explore AI developments and understand their main implications, but do not keep up consistently. |
 | 4 | I regularly learn about relevant AI developments and can explain what they change about its uses and limitations. |
-| 5 | I consistently keep up with relevant AI developments, examine the evidence behind them, and can explain their implications and uncertainties. |
+| 5 | I consistently keep up, check the evidence behind new developments, and explain their implications and uncertainties. |
 
 #### U7. Understand AI model architectures
 
@@ -147,7 +149,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | --- | --- |
 | 1 | I cannot explain the internal structure of an AI model. |
 | 2 | I can name model components but struggle to explain what they do. |
-| 3 | I can explain what some model components do, but struggle to explain how they work together to produce an output. |
+| 3 | I can explain what some components do, but not how they work together to produce an output. |
 | 4 | I can explain how a model’s components and structure process inputs and produce outputs. |
 | 5 | I can compare model architectures and explain how structural choices affect behaviour and limitations. |
 
@@ -159,9 +161,9 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 
 | Level | Description |
 | --- | --- |
-| 1 | I cannot explain the components of an AI system. |
+| 1 | I cannot yet name or explain the main components of an AI system. |
 | 2 | I can identify a model and some surrounding components but struggle to explain their roles. |
-| 3 | I can explain the roles of the main system components, but struggle to explain how information moves between them. |
+| 3 | I can explain the main components’ roles, but struggle to explain how information moves between them. |
 | 4 | I can explain how data, models, tools and infrastructure connect in a working AI system. |
 | 5 | I can explain system-level trade-offs, dependencies and failure points, distinguishing them from model internals. |
 
@@ -173,11 +175,11 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 
 | Level | Description |
 | --- | --- |
-| 1 | I cannot yet explain how an AI agent operates. |
+| 1 | I cannot yet explain how an AI agent decides what to do. |
 | 2 | I know an agent can take actions but struggle to explain how it chooses or checks them. |
-| 3 | I can describe an agent’s main functions, but struggle to explain how it selects actions and responds to results. |
-| 4 | I can explain how an agent selects actions, uses tools and responds to feedback, and where human oversight is needed. |
-| 5 | I can explain how an agent’s design affects its behaviour and reliability, and justify when human approval, intervention or stopping is needed. |
+| 3 | I can describe what an agent does, but struggle to explain how it picks actions and uses results. |
+| 4 | I can explain how an agent chooses actions, uses tools and feedback, and where oversight is needed. |
+| 5 | I can explain how design affects an agent’s reliability, and justify when to approve, intervene or stop it. |
 
 ### 2. Learn and Solve with AI
 
@@ -192,8 +194,8 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | 1 | I cannot identify what I need to learn when studying with AI. |
 | 2 | I can choose a topic to study with AI, but struggle to identify what I do not understand. |
 | 3 | I can sometimes identify a specific learning need, but do not consistently turn it into a clear goal. |
-| 4 | I can set a specific goal for studying with AI based on what I already understand and what I need to learn. |
-| 5 | I can prioritize what I need to learn, set clear goals for studying with AI, and explain how I will know I have achieved them. |
+| 4 | I can set a specific study goal based on what I already understand and what I still need. |
+| 5 | I can prioritize what to learn, set clear goals, and explain how I will know I have met them. |
 
 #### L2. Manage the learning process
 
@@ -205,9 +207,9 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | --- | --- |
 | 1 | I cannot yet organize a useful way to study with AI. |
 | 2 | I can use AI to study, but struggle to judge whether the approach is helping me learn. |
-| 3 | I can choose a study approach and check my understanding, but do not consistently use those checks to guide what I do next. |
+| 3 | I can choose an approach and check my understanding, but do not consistently let the checks guide me. |
 | 4 | I can use checks of my understanding to decide whether to continue, change approach or work independently. |
-| 5 | I can explain why a study approach fits my needs and make well-justified adjustments, or keep it when it is working. |
+| 5 | I can explain why an approach fits my needs, and adjust it, or keep it, for good reasons. |
 
 #### L3. Reason through the problem
 
@@ -233,7 +235,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | --- | --- |
 | 1 | I cannot yet explain what I have learned in my own words. |
 | 2 | I can restate parts of an explanation, but struggle to explain their meaning. |
-| 3 | I can explain the main idea in my own words, but cannot consistently apply it to a different problem without help. |
+| 3 | I can explain the main idea in my own words, but struggle to apply it to a new problem alone. |
 | 4 | I can explain the idea in my own words and show how to apply it to a different problem. |
 | 5 | I can explain how to adapt the idea to a different problem and recognize when it no longer applies. |
 
@@ -249,7 +251,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | --- | --- |
 | 1 | I cannot yet describe what the finished work needs to achieve. |
 | 2 | I can state the general output I want, but leave important requirements unclear. |
-| 3 | I can describe the purpose and main requirements, but do not consistently make clear how the finished work should be judged. |
+| 3 | I can describe the purpose and main requirements, but often leave unclear how the work will be judged. |
 | 4 | I can give a clear brief covering the purpose, audience, format, constraints and success criteria. |
 | 5 | I can resolve ambiguous or competing requirements and explain which criteria matter most for the intended use. |
 
@@ -265,7 +267,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | 2 | I can identify some steps, but struggle to put them in a workable order. |
 | 3 | I can plan the main steps, but do not consistently divide the work appropriately or set useful checkpoints. |
 | 4 | I can plan a workable sequence with suitable roles for myself, AI and other tools, and clear checkpoints. |
-| 5 | I can explain why the division of work is suitable and adapt the plan when requirements change or one step affects another. |
+| 5 | I can explain why the division of work suits the task, and adapt the plan when things change. |
 
 #### C3. Provide useful information and resources
 
@@ -279,7 +281,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | 2 | I can supply some information, but struggle to judge whether it is relevant or sufficient. |
 | 3 | I can choose useful information, but do not consistently organize it clearly or identify its sources. |
 | 4 | I can provide the information needed for the task, organize it clearly and identify its sources. |
-| 5 | I can identify and address missing or conflicting information, and explain why the information I provide is suitable for the task. |
+| 5 | I can spot and fix missing or conflicting information, and explain why what I provide suits the task. |
 
 #### C4. Develop and refine the output
 
@@ -293,7 +295,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | 2 | I can make small edits, but struggle to connect the contributions into a whole. |
 | 3 | I can combine contributions and make useful changes, but some parts remain inconsistent. |
 | 4 | I can integrate contributions coherently and carry through justified decisions about what to change or keep. |
-| 5 | I can refine the work as a whole, checking that changes improve it without introducing inconsistencies or removing useful material. |
+| 5 | I can refine the work as a whole, so changes improve it without adding inconsistencies or losing good material. |
 
 #### C5. Deliver a usable result
 
@@ -303,11 +305,11 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 
 | Level | Description |
 | --- | --- |
-| 1 | I cannot produce usable work with AI for my assignments. |
-| 2 | I can produce parts of my assignments with AI, but the work needs major corrections or additions before it is usable. |
+| 1 | I cannot yet produce work with AI that is usable for my assignments. |
+| 2 | I can produce parts of assignments with AI, but they need major fixes before they are usable. |
 | 3 | I can sometimes produce usable work with AI for my assignments, but do not consistently meet all the requirements. |
-| 4 | I can consistently produce accurate, complete work with AI that meets my assignments’ requirements and suits their intended audience and format. |
-| 5 | I can consistently produce work with AI that meets my assignments’ requirements with particular clarity and coherence, making it easy for the intended audience to use. |
+| 4 | I can consistently produce accurate, complete work with AI that meets the requirements and suits its audience. |
+| 5 | I can consistently produce work with AI that meets the requirements and is especially clear and easy to use. |
 
 #### C6. Direct and supervise AI agents
 
@@ -321,7 +323,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | 2 | I can give an agent a task, but struggle to set appropriate permissions or monitor its actions. |
 | 3 | I can set boundaries and check progress, but do not consistently recognize when to intervene. |
 | 4 | I can define tasks, set appropriate permissions and checkpoints, monitor progress and intervene when needed. |
-| 5 | I can adjust oversight to the risks, justify when to intervene or let the agent continue, and check whether its output meets the requirements. |
+| 5 | I can match oversight to the risk, judge when to intervene, and check the output meets the requirements. |
 
 ### 4. Evaluate and Use AI Responsibly
 
@@ -352,7 +354,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | 2 | I can notice an obvious inconsistency, but struggle to explain its significance. |
 | 3 | I can sometimes assess whether the reasoning supports the conclusion, but do not do so consistently. |
 | 4 | I can assess the reasoning and explain how strongly it supports the conclusion. |
-| 5 | I can explain how assumptions and plausible alternatives affect the conclusion, and distinguish what is well supported from what remains uncertain. |
+| 5 | I can explain how assumptions and alternatives affect the conclusion, and separate what is supported from what is uncertain. |
 
 #### R3. Assess fairness and potential harm
 
@@ -364,7 +366,7 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | --- | --- |
 | 1 | I cannot yet identify who might be harmed or excluded. |
 | 2 | I can name a general concern, but struggle to explain who is affected or how. |
-| 3 | I can sometimes identify who could be affected and suggest a practical safeguard, but do not consistently consider these risks. |
+| 3 | I can sometimes identify who could be affected and suggest a safeguard, but not consistently. |
 | 4 | I can explain who is affected and propose a practical way to reduce the risk. |
 | 5 | I can compare practical responses and explain their trade-offs and the risks that would remain. |
 
@@ -378,9 +380,9 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | --- | --- |
 | 1 | I cannot yet recognize relevant data or security risks when using AI. |
 | 2 | I can recognize an obvious risk, but am unsure what to do about it. |
-| 3 | I can recognize common risks and choose a suitable precaution, but do not consistently apply these checks when using AI. |
+| 3 | I can recognize common risks and choose a suitable precaution, but do not apply these checks consistently. |
 | 4 | I can recognize the relevant risk and choose a safeguard that addresses it. |
-| 5 | I can explain why a safeguard fits the situation, assess the risk that remains, and recognize when a safer approach or further advice is needed. |
+| 5 | I can explain why a safeguard fits, what risk remains, and when a safer approach or advice is needed. |
 
 #### R5. Follow rules and disclose AI use
 
@@ -392,9 +394,9 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | --- | --- |
 | 1 | I do not know how to follow the rules for AI use or acknowledge the help I receive. |
 | 2 | I can say that I used AI, but am unsure what the rules require or how to credit sources. |
-| 3 | I can follow clear rules and explain how I used AI, but do not consistently acknowledge all the help and sources I use. |
+| 3 | I can follow clear rules and explain my AI use, but do not consistently credit all help and sources. |
 | 4 | I can follow the relevant rules, clearly explain how I used AI and give appropriate credit to sources. |
-| 5 | I can give a precise account of what I did and what AI contributed, credit all relevant sources and seek clarification when the rules are unclear. |
+| 5 | I can say precisely what I did and what AI contributed, credit all sources, and ask when rules are unclear. |
 
 #### R6. Make an accountable final decision
 
@@ -406,9 +408,9 @@ Response: **1 / 2 / 3 / 4 / 5 / Not sure**
 | --- | --- |
 | 1 | I cannot yet judge whether AI-supported work is ready to use. |
 | 2 | I can decide whether work seems ready to use, but struggle to explain what evidence supports my decision. |
-| 3 | I can sometimes make a justified decision about whether work is ready to use, but do not consistently consider important uncertainties or consequences. |
+| 3 | I can sometimes justify whether work is ready, but do not consistently weigh uncertainties or consequences. |
 | 4 | I can justify whether to use, revise, withhold or seek review based on the evidence and consequences. |
-| 5 | I can weigh competing considerations, explain the uncertainties and consequences behind my decision, and identify what evidence would make me reconsider it. |
+| 5 | I can weigh trade-offs, explain what is uncertain, and say what evidence would change my mind. |
 
 ### Submit
 
@@ -520,7 +522,7 @@ Store one response per capability, retaining all 25 IDs even when unanswered. Ke
 
 ```text
 Attempt metadata:
-  instrument_version: self_assessment_v2.6
+  instrument_version: self_assessment_v2.7
   framework_reference: working-doc-D-E-F
   attempt_id: opaque ID
   participant_key: pseudonymous ID

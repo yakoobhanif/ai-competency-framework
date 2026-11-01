@@ -9,8 +9,8 @@ const materialDir = fileURLToPath(new URL('../../material/', import.meta.url));
 const read = (name: string) => fs.readFileSync(materialDir + name, 'utf8');
 export const deckPath = `${materialDir}tasks/task_1_learning/How Memory and Attention Work.pdf`;
 const selfSource = read('quizzes/self-assessment.md');
-export const selfVersion = '2.6';
-export const quizVersion = '2.2';
+export const selfVersion = '2.7';
+export const quizVersion = '2.3';
 const quizSource = read('quizzes/capability-quiz.md');
 
 export const capabilities = frameworkCapabilities;
