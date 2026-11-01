@@ -1,0 +1,122 @@
+.capability-portrait {
+  position: relative;
+}
+.portrait-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 640 / 560;
+  overflow: visible;
+}
+.portrait-axis-labels {
+  font:
+    500 17px Manrope,
+    sans-serif;
+}
+.portrait-main {
+  vector-effect: non-scaling-stroke;
+}
+.portrait-guides {
+  opacity: 0.55;
+}
+.portrait-series {
+  transition:
+    opacity 180ms ease,
+    filter 180ms ease;
+  cursor: pointer;
+}
+.portrait-series path {
+  transition:
+    stroke-width 180ms ease,
+    fill-opacity 180ms ease;
+}
+.capability-portrait[data-highlight='main'] .portrait-series:not([data-series='main']),
+.capability-portrait[data-highlight='baseline'] .portrait-series:not([data-series='baseline']),
+.capability-portrait[data-highlight='self'] .portrait-series:not([data-series='self']) {
+  opacity: 0.16;
+}
+.capability-portrait[data-highlight='main'] [data-series='main'].portrait-series,
+.capability-portrait[data-highlight='baseline'] [data-series='baseline'].portrait-series,
+.capability-portrait[data-highlight='self'] [data-series='self'].portrait-series {
+  filter: drop-shadow(0 0 5px #e2eaff40);
+}
+.capability-portrait[data-highlight='main'] .portrait-main {
+  stroke-width: 4;
+  fill-opacity: 0.4;
+}
+.capability-portrait[data-highlight='baseline'] .portrait-baseline path,
+.capability-portrait[data-highlight='self'] .portrait-self path {
+  stroke-width: 4;
+  fill-opacity: 0.18;
+}
+.profile-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 10px;
+  padding: 4px 0;
+}
+.portrait-legend-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font:
+    400 11px Manrope,
+    sans-serif;
+  line-height: 1.6;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #b9bfcc;
+  padding: 8px;
+  cursor: pointer;
+  min-height: 34px;
+  transition:
+    background 180ms,
+    color 180ms,
+    border-color 180ms;
+}
+.portrait-legend-button i {
+  width: 20px;
+  height: 0;
+  border-top-width: 2px;
+  flex-shrink: 0;
+}
+.portrait-legend-button:hover,
+.portrait-legend-button:focus-visible,
+.portrait-legend-button[aria-pressed='true'] {
+  background: #222833;
+  border-color: #4c5666;
+  color: #f1f3f7;
+}
+@media (max-width: 680px) {
+  .portrait-axis-labels {
+    font-size: 21px;
+  }
+  .portrait-legend-button {
+    min-height: 44px;
+    padding-inline: 7px;
+  }
+  .profile-legend {
+    gap: 2px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portrait-series,
+  .portrait-series path,
+  .portrait-legend-button {
+    transition: none;
+  }
+}
+@media print {
+  .portrait-series {
+    opacity: 1 !important;
+    filter: none !important;
+  }
+  .portrait-legend-button {
+    padding: 4px;
+    font-size: 9px;
+    border: 0;
+  }
+}

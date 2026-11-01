@@ -1,0 +1,53 @@
+{
+  "name": "ai-competency-platform",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "tsx watch server/index.ts",
+    "start": "NODE_ENV=production tsx server/index.ts",
+    "build": "tsc --noEmit && vite build",
+    "test": "DATA_DIR=.data/test-unit RUN_EXPORT_DIR=.data/test-unit/student-runs tsx --test --test-concurrency=1 tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "test:live": "tsx scripts/live-smoke.ts"
+  },
+  "dependencies": {
+    "@fontsource/manrope": "^5.2.0",
+    "cheerio": "^1.1.0",
+    "dotenv": "^16.6.0",
+    "express": "^5.1.0",
+    "katex": "^0.16.47",
+    "lucide-react": "^0.468.0",
+    "mammoth": "^1.11.0",
+    "multer": "^2.0.2",
+    "pdfjs-dist": "^5.4.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-markdown": "^10.1.0",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "three": "^0.180.0",
+    "turbo-stream": "2.4.1",
+    "undici": "^7.16.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.55.0",
+    "@types/express": "^5.0.3",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/three": "^0.180.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "prettier": "^3.9.9",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.1.0"
+  }
+}
