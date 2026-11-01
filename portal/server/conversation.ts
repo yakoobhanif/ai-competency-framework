@@ -4,6 +4,9 @@ import type { Turn } from '../shared/types.js';
 
 const incomplete =
   'The conversation structure is incomplete or ambiguous. Upload a complete export of this task conversation.';
+export const unavailableMarker = '[Non-text message content unavailable in this export]';
+export const unavailableNote =
+  'This conversation includes attachments or media the portal cannot read. They are marked in the preview, and the rest of the conversation will still be scored.';
 
 export function conversationTurns(conversation: any): Turn[] {
   // Single-conversation exports may be a bare message list or a Gemini contents list.
@@ -89,7 +92,7 @@ export function conversationTurns(conversation: any): Turn[] {
         if (typeof part?.text === 'string' && (!part.type || part.type === 'text'))
           return part.text;
         unavailableContent = true;
-        return '[Non-text message content unavailable in this export]';
+        return unavailableMarker;
       })
       .join('\n')
       .trim();

@@ -5,7 +5,13 @@ import { load } from 'cheerio';
 import { isPublicIp } from './sources.js';
 import { digest } from './store.js';
 import type { Turn, Upload } from '../shared/types.js';
-import { conversationTurns, streamedConversation, formatTurns } from './conversation.js';
+import {
+  conversationTurns,
+  streamedConversation,
+  formatTurns,
+  unavailableMarker,
+  unavailableNote,
+} from './conversation.js';
 import { parseTranscript } from './text-transcript.js';
 import { geminiRpcId, geminiRequestBody, geminiTurns } from './gemini-chat.js';
 
@@ -148,26 +154,30 @@ export function extractSharedChat(html: string): Turn[] {
     if (node.parents('[data-message-author-role]').length) return;
     const role = node.attr('data-message-author-role');
     if (role !== 'user' && role !== 'assistant') return;
-    if (node.find('img,video,audio,iframe').length)
-      throw new Error(
-        'This chat contains media that cannot be imported as complete text. Use a text transcript and check it against the original.',
-      );
     const content = node.clone();
+    const media = content.find('img,video,audio,iframe');
+    const unavailableContent = media.length > 0;
+    media.replaceWith(unavailableMarker);
     content.find('script,style,button,svg').remove();
     content.find('br').replaceWith('\n');
     content.find('p,div,li,pre,h1,h2,h3,tr').append('\n');
     const text = content.text().trim();
-    if (text) turns.push({ id: '', role: role === 'user' ? 'student' : 'assistant', text });
+    if (text)
+      turns.push({
+        id: '',
+        role: role === 'user' ? 'student' : 'assistant',
+        text,
+        ...(unavailableContent ? { unavailableContent: true } : {}),
+      });
   });
   // A Claude page saved from the browser marks speakers with these two hooks.
   if (!turns.length)
     $('[data-testid="user-message"], .font-claude-response').each((_i, element) => {
       const node = $(element);
-      if (node.find('img,video,audio,iframe').length)
-        throw new Error(
-          'This chat contains media that cannot be imported as complete text. Use a text transcript and check it against the original.',
-        );
       const content = node.clone();
+      const media = content.find('img,video,audio,iframe');
+      const unavailableContent = media.length > 0;
+      media.replaceWith(unavailableMarker);
       content.find('script,style,button,svg').remove();
       content.find('br').replaceWith('\n');
       content.find('p,div,li,pre,h1,h2,h3,tr').append('\n');
@@ -177,6 +187,7 @@ export function extractSharedChat(html: string): Turn[] {
           id: '',
           role: node.is('[data-testid="user-message"]') ? 'student' : 'assistant',
           text,
+          ...(unavailableContent ? { unavailableContent: true } : {}),
         });
     });
   // Legacy public pages embed a conversation tree. Follow only its selected branch.
@@ -212,12 +223,22 @@ export function extractSharedChat(html: string): Turn[] {
           const role = message?.author?.role;
           if (role !== 'user' && role !== 'assistant') continue;
           const parts = message?.content?.parts;
-          if (!Array.isArray(parts) || parts.some((p) => typeof p !== 'string'))
+          if (!Array.isArray(parts))
             throw new Error(
               'This chat includes content we cannot import reliably. Use a complete text transcript and check the preview.',
             );
-          const text = parts.join('\n').trim();
-          if (text) turns.push({ id: '', role: role === 'user' ? 'student' : 'assistant', text });
+          const unavailableContent = parts.some((p) => typeof p !== 'string');
+          const text = parts
+            .map((p) => (typeof p === 'string' ? p : unavailableMarker))
+            .join('\n')
+            .trim();
+          if (text)
+            turns.push({
+              id: '',
+              role: role === 'user' ? 'student' : 'assistant',
+              text,
+              ...(unavailableContent ? { unavailableContent: true } : {}),
+            });
         }
       }
     }
@@ -289,11 +310,9 @@ export async function sharedChatUpload(html: string, url: string): Promise<Uploa
     sourceUrl: url,
     importedAt: new Date().toISOString(),
     kind: 'transcript',
-    parseStatus: turns.some((t) => t.unavailableContent) ? 'needs_review' : 'ready',
-    parsingNote: turns.some((t) => t.unavailableContent)
-      ? 'This conversation contains attachments or media whose contents are unavailable. It needs review before automatic scoring.'
-      : undefined,
+    parseStatus: 'ready',
+    parsingNote: turns.some((t) => t.unavailableContent) ? unavailableNote : undefined,
     sourceHash: digest(html),
-    parserVersion: 'conversation-1.3',
+    parserVersion: 'conversation-1.4',
   };
 }

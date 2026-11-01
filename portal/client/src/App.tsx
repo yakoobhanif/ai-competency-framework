@@ -1170,7 +1170,7 @@ function UploadPanel({
             <p className="caption" role="status">
               {file.parseStatus === 'needs_review'
                 ? `Saved for review. ${file.parsingNote}`
-                : 'Conversation ready. Check the preview before confirming.'}
+                : `Conversation ready. ${file.parsingNote ? `${file.parsingNote} ` : ''}Check the preview before confirming.`}
             </p>
           )}
           {file.sourceUrl && (

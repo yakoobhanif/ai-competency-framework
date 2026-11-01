@@ -82,7 +82,7 @@ test('stream decoder rejects constructor tags and prototype keys instead of exec
   }
 });
 
-test('missing media is visible in the preview and prevents automatic scoring', async () => {
+test('missing media is visible in the preview and does not prevent automatic scoring', async () => {
   const data = {
     messages: [
       {
@@ -98,7 +98,9 @@ test('missing media is visible in the preview and prevents automatic scoring', a
     'learning',
     null,
   );
-  assert.equal(result.parseStatus, 'needs_review');
+  assert.equal(result.parseStatus, 'ready');
+  assert.match(result.parsingNote!, /still be scored/);
+  assert.equal(result.turns[0].unavailableContent, true);
   assert.equal(result.turns[0].role, 'student');
   assert.match(result.text, /Non-text message content unavailable/);
 });
@@ -149,15 +151,21 @@ test('shared text preserves order and roles, excludes chrome and remains unconfi
   assert.equal(result.hash.length, 64);
 });
 
-test('blocked, login-only, one-sided, oversized and multimedia pages are not graded', () => {
+test('blocked, login-only, one-sided and oversized pages are not graded', () => {
   for (const page of [
     '<h1>Just a moment</h1>',
     '<h1>Sign in</h1>',
     '<div data-message-author-role="assistant">One answer</div>',
-    html.replace('Explain attention.', '<img src="image.png">'),
     html.replace('Explain attention.', 'x'.repeat(180001)),
   ])
     assert.throws(() => extractSharedChat(page));
+});
+
+test('media in a shared page is marked in place and the turn is kept', () => {
+  const turns = extractSharedChat(html.replace('Explain attention.', '<img src="image.png">'));
+  assert.equal(turns[0].role, 'student');
+  assert.equal(turns[0].unavailableContent, true);
+  assert.match(turns[0].text, /Non-text message content unavailable/);
 });
 
 test('structured legacy conversations follow selected branch, not discarded answers', () => {
@@ -236,7 +244,7 @@ test('Gemini generated images and removed shares are never scored silently', asy
     ]),
     'https://gemini.google.com/share/abc',
   );
-  assert.equal(image.parseStatus, 'needs_review');
+  assert.equal(image.parseStatus, 'ready');
   assert.match(image.text, /Non-text message content unavailable/);
   await assert.rejects(
     sharedChatUpload(

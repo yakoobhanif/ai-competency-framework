@@ -91,8 +91,9 @@ export async function gradeTranscript(
       reason: 'Illustrative demo probability; this transcript has not been evaluated by AI.',
       model: 'demo',
     }));
+  // Uploads saved by earlier parsers may be held only for unavailable media, which is still scored.
   if (
-    upload.parseStatus === 'needs_review' ||
+    (upload.parseStatus === 'needs_review' && !upload.turns.some((t) => t.unavailableContent)) ||
     !upload.complete ||
     !upload.turns.some((t) => t.role === 'student')
   )

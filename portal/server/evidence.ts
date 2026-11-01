@@ -4,7 +4,7 @@ import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import mammoth from 'mammoth';
 import type { Slot, Turn, Upload, Pathway } from '../shared/types.js';
 import { digest } from './store.js';
-import { conversationTurns, formatTurns } from './conversation.js';
+import { conversationTurns, formatTurns, unavailableNote } from './conversation.js';
 import { importChatHtml } from './shared-chat.js';
 import { load } from 'cheerio';
 import { parseTranscript } from './text-transcript.js';
@@ -79,6 +79,7 @@ export async function validateUpload(
     );
   let turns: Turn[] = [];
   let parsingNote: string | undefined;
+  let needsReview = false;
   if (slot !== 'deliverable') {
     try {
       if (ext === '.html') turns = await importChatHtml(text);
@@ -97,9 +98,7 @@ export async function validateUpload(
           'Speakers could not be identified reliably. The original will need review before scoring.',
         );
       text = formatTurns(turns);
-      if (turns.some((t) => t.unavailableContent))
-        parsingNote =
-          'This conversation contains attachments or media whose contents are unavailable. It needs review before automatic scoring.';
+      if (turns.some((t) => t.unavailableContent)) parsingNote = unavailableNote;
     } catch (error) {
       if (
         error instanceof Error &&
@@ -107,6 +106,7 @@ export async function validateUpload(
       )
         throw error;
       turns = [];
+      needsReview = true;
       parsingNote = error instanceof Error ? error.message : 'This conversation needs review.';
       if (ext === '.html') {
         const $ = load(text);
@@ -131,9 +131,9 @@ export async function validateUpload(
     complete: false,
     extension: ext,
     kind: slot === 'deliverable' ? undefined : 'transcript',
-    parseStatus: parsingNote ? 'needs_review' : 'ready',
+    parseStatus: needsReview ? 'needs_review' : 'ready',
     parsingNote,
-    parserVersion: slot === 'deliverable' ? undefined : 'conversation-1.3',
+    parserVersion: slot === 'deliverable' ? undefined : 'conversation-1.4',
   };
 }
 

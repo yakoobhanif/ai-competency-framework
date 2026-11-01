@@ -297,3 +297,51 @@ test('completed demo transcripts show illustrative learning results despite pars
   a.uploads.learning.complete = false;
   assert((await gradeTranscript(a, 'learning', '')).every((o) => o.status === 'pending'));
 });
+
+test('live transcripts with unavailable media reach Jev, including uploads saved for review earlier', async () => {
+  const a = fixtureAttempt();
+  a.mode = 'live';
+  a.uploads.learning = await validateUpload(
+    'learning.json',
+    Buffer.from(
+      JSON.stringify({
+        messages: [
+          {
+            role: 'user',
+            content: { parts: ['Explain this.', { content_type: 'image_asset_pointer' }] },
+          },
+          { role: 'assistant', content: 'It shows memory systems.' },
+        ],
+      }),
+    ),
+    'learning',
+    null,
+  );
+  a.uploads.learning.complete = true;
+  const fetchBefore = globalThis.fetch,
+    keyBefore = process.env.TYPESAFE_API_KEY;
+  process.env.TYPESAFE_API_KEY = 'synthetic';
+  const sent: any[] = [];
+  globalThis.fetch = async (_url, options) => {
+    const body = JSON.parse(String(options?.body));
+    sent.push(body);
+    return Response.json({
+      model: 'jev-test',
+      answers: Object.fromEntries(
+        Object.keys(body.questions).map((id) => [id, { type: 'noul', noul: 0.8 }]),
+      ),
+    });
+  };
+  try {
+    assert.equal(a.uploads.learning.parseStatus, 'ready');
+    assert((await gradeTranscript(a, 'learning', '')).every((o) => o.status === 'scored'));
+    assert.match(sent[0].state.transcript[0].text, /Non-text message content unavailable/);
+    a.uploads.learning.parseStatus = 'needs_review';
+    assert((await gradeTranscript(a, 'learning', '')).every((o) => o.status === 'scored'));
+    assert.equal(sent.length, 2);
+  } finally {
+    globalThis.fetch = fetchBefore;
+    if (keyBefore === undefined) delete process.env.TYPESAFE_API_KEY;
+    else process.env.TYPESAFE_API_KEY = keyBefore;
+  }
+});

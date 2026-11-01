@@ -56,7 +56,7 @@ Share links are best effort, because none of these providers offers an official 
 | Gemini | Imports directly, including `g.co` short links. |
 | Claude | Claude's bot protection currently blocks the import, and we don't try to get around it. The student gets instructions to open the link in their browser, save the page as "Webpage, Complete" and upload that file. The direct import will start working if Claude ever allows it. |
 
-Conversations containing images or attachments that we can't read go to human review rather than being scored on partial evidence.
+Conversations containing images or attachments that we can't read are still scored. Each unreadable item is marked in the transcript, and Jev assesses the rest of the conversation.
 
 ## Coding tests
 
