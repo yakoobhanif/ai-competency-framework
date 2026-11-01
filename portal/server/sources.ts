@@ -53,7 +53,7 @@ export async function fetchSource(
     if ([301, 302, 303, 307, 308].includes(response.statusCode)) {
       await response.body.dump();
       if (!response.headers.location) throw new Error('Source redirect has no destination.');
-      return fetchSource(new URL(String(response.headers.location), url).href, depth + 1);
+      return await fetchSource(new URL(String(response.headers.location), url).href, depth + 1);
     }
     if (
       response.statusCode !== 200 ||
