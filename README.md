@@ -2,9 +2,14 @@
   <img src="assets/banner.png" alt="AI Competency Framework: defining what AI competency means for university students, and measuring it from their real LLM conversations." width="100%">
 </p>
 
-How good are university students at working with AI? Most surveys ask students to rate themselves, which tells you what they believe rather than what they can do. This project tries to do better in two ways.
+AI can now write a polished essay or solve a hard problem in seconds, so finished work says much less than it used to about what a student actually knows. Nearly every student uses these tools, but using AI is not the same as using it well. The question for universities is whether students are using AI to think better or to avoid thinking, and today they have little evidence either way.
 
-First, it defines what AI competency actually means for a student: 25 capabilities grouped under four domains. Second, it tests whether we can see those capabilities directly in the conversations students have with tools like ChatGPT, Gemini and Claude, and score them automatically.
+Most AI literacy frameworks describe what students should know, or ask them how confident they feel. Neither shows what a student can actually do with AI when learning something new or creating real work. This project tries to close that gap in two ways:
+
+1. **Define what competency means.** We reviewed academic studies and practitioner, industry, policy and university frameworks, and turned them into 25 measurable capabilities under four domains.
+2. **Measure it from real work.** Students complete a self-assessment, a quiz and practical tasks, which show what they believe they can do, what they know and what they actually do. The experimental part is extracting demonstrated capabilities automatically from their transcripts with tools like ChatGPT, Gemini and Claude, because the conversation shows how the work was done and not just how it turned out.
+
+Together, these can show a student where their real strengths are and where what they believe differs from what they show. Over time, the goal is to help universities redesign homework and assessment for the generative AI era, so that AI strengthens learning rather than replacing it, and to give universities and employers a clearer view of students' AI skills.
 
 The work is a research pilot at the National University of Singapore.
 
