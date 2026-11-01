@@ -146,7 +146,7 @@ export const deliverableRubrics = {
     [
       'evidence',
       'Evidence',
-      'Uses a concrete example and at least two identifiable sources supporting substantive claims. Check supplied independent source passages, not just citations.',
+      'Uses a concrete example and at least two identifiable sources supporting substantive claims. Where source passages are supplied, check claims against them, not just the citations. A source the portal could not retrieve is not evidence against the essay.',
     ],
     [
       'judgement',

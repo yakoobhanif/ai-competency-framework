@@ -12,7 +12,7 @@ For capability c, define Q as its quiz percentage and E as its task probability 
 
 C5 has no learning contribution. Creation E is exactly 1 for an artifact Pass and 0 for Fail. A technical Pending leaves it unavailable. C5 uses the same boost formula; failure cannot reduce a correct quiz result.
 
-Essay grading uses five NOUL criterion probabilities. Pass requires at least three >=0.70 and all five >=0.50, inclusively. Valid decisions are always Pass/Fail; source retrieval failures and word count inform the criterion decisions without extra gates. The complete essay includes the bibliography; word count excludes it. Coding uses the isolated deterministic runner unchanged: all 100 hidden cases must pass, with the published eight-second/96 MB configuration. Infrastructure failure is Pending, not Fail.
+Essay grading uses five NOUL criterion probabilities. Pass requires at least three >=0.70 and all five >=0.50, inclusively. Valid decisions are always Pass/Fail; source checks and word count inform the criterion decisions without extra gates. Each linked source reaches Jev as `retrieved`, `partial` (the first 60,000 characters), `metadata_only` (Crossref title and any abstract for a DOI whose page is unavailable; Crossref receives only the DOI) or `not_retrieved` with a neutral reason. A source the portal could not retrieve is not evidence against the essay, and Jev judges it from its citation. The complete essay includes the bibliography; word count excludes it. Coding uses the isolated deterministic runner unchanged: all 100 hidden cases must pass, with the published eight-second/96 MB configuration. Infrastructure failure is Pending, not Fail.
 
 ## Calls and persistence
 
