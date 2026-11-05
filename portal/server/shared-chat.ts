@@ -138,21 +138,31 @@ export async function fetchSharedChat(
         );
       throw new Error(unavailable);
     }
-    const chunks: Buffer[] = [];
-    let size = 0;
-    for await (const chunk of response.body) {
-      const buffer = Buffer.from(chunk);
-      size += buffer.length;
-      if (size > 2_000_000)
-        throw new Error(
-          'Shared chat exceeds the import limit. Use a complete transcript file instead.',
-        );
-      chunks.push(buffer);
-    }
-    return { url: url.href, html: Buffer.concat(chunks).toString('utf8') };
+    return { url: url.href, html: await readSharePage(response.body, shareByteLimit(url)) };
   } finally {
     await agent.close();
   }
+}
+
+// ChatGPT sends browsers its whole app page, which passes 2 MB even for short chats.
+// The extracted text must still fit the 180000-character review limit.
+export function shareByteLimit(url: URL): number {
+  return url.hostname === 'chatgpt.com' ? 20_000_000 : 2_000_000;
+}
+
+export async function readSharePage(body: AsyncIterable<Uint8Array>, limit: number) {
+  const chunks: Buffer[] = [];
+  let size = 0;
+  for await (const chunk of body) {
+    const buffer = Buffer.from(chunk);
+    size += buffer.length;
+    if (size > limit)
+      throw new Error(
+        'Shared chat exceeds the import limit. Use a complete transcript file instead.',
+      );
+    chunks.push(buffer);
+  }
+  return Buffer.concat(chunks).toString('utf8');
 }
 
 export function extractSharedChat(html: string): Turn[] {

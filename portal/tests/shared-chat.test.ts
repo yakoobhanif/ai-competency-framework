@@ -1,6 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { sharedChatUrl, extractSharedChat, sharedChatUpload } from '../server/shared-chat.js';
+import {
+  sharedChatUrl,
+  extractSharedChat,
+  sharedChatUpload,
+  readSharePage,
+  shareByteLimit,
+} from '../server/shared-chat.js';
 import { encode } from 'turbo-stream';
 import { validateUpload } from '../server/evidence.js';
 
@@ -328,4 +334,40 @@ test('current ChatGPT share pages import from embedded JSON, including masked up
   const uploaded = await validateUpload('conversation.html', Buffer.from(page), 'learning', null);
   check(uploaded.turns);
   assert.equal(uploaded.parseStatus, 'ready');
+});
+
+test('ChatGPT pages larger than 2 MB import while other providers keep the smaller cap', async () => {
+  const data = {
+    conversation: {
+      messages: [
+        { id: 'u1', role: 'user', content: 'How do I start this essay?' },
+        { id: 'a1', role: 'assistant', content: 'Begin with your thesis.' },
+      ],
+    },
+  };
+  // Mimic the app shell ChatGPT now sends around the conversation data.
+  const padding = `<script type="application/json">${JSON.stringify({ shell: 'x'.repeat(3_000_000) })}</script>`;
+  const page = `<html><body>${padding}<script id="__WEB_MOBILE_DATA__" type="application/json">${JSON.stringify(data)}</script>${padding}</body></html>`;
+  const chunks = async function* (text: string) {
+    const bytes = Buffer.from(text);
+    for (let i = 0; i < bytes.length; i += 65536) yield bytes.subarray(i, i + 65536);
+  };
+  const url = new URL('https://chatgpt.com/share/x');
+  const html = await readSharePage(chunks(page), shareByteLimit(url));
+  const imported = await sharedChatUpload(html, url.href);
+  assert.deepEqual(
+    imported.turns.map((t) => [t.role, t.text]),
+    [
+      ['student', 'How do I start this essay?'],
+      ['assistant', 'Begin with your thesis.'],
+    ],
+  );
+  await assert.rejects(
+    readSharePage(chunks(page), shareByteLimit(new URL('https://claude.ai/share/x'))),
+    /import limit/,
+  );
+  await assert.rejects(
+    readSharePage(chunks('x'.repeat(20_000_001)), shareByteLimit(url)),
+    /import limit/,
+  );
 });
