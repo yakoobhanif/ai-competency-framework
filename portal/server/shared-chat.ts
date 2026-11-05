@@ -8,6 +8,7 @@ import type { Turn, Upload } from '../shared/types.js';
 import {
   conversationTurns,
   streamedConversation,
+  webMobileConversation,
   formatTurns,
   unavailableMarker,
   unavailableNote,
@@ -77,7 +78,16 @@ function shareRequest(url: URL) {
     };
   return {
     target: url,
-    options: { method: 'GET' as const, headers: { accept: 'text/html' } },
+    // ChatGPT serves a preview stub without the conversation to non-browser user agents.
+    options: {
+      method: 'GET' as const,
+      headers: {
+        accept: 'text/html',
+        'accept-language': 'en-US,en;q=0.9',
+        'user-agent':
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
+      },
+    },
     contentType: 'text/html',
   };
 }
@@ -261,6 +271,8 @@ export async function importChatHtml(html: string): Promise<Turn[]> {
   } catch (error) {
     streamError = error;
   }
+  const embedded = webMobileConversation(html);
+  if (embedded) return embedded;
   try {
     return extractSharedChat(html);
   } catch (error) {
@@ -313,6 +325,6 @@ export async function sharedChatUpload(html: string, url: string): Promise<Uploa
     parseStatus: 'ready',
     parsingNote: turns.some((t) => t.unavailableContent) ? unavailableNote : undefined,
     sourceHash: digest(html),
-    parserVersion: 'conversation-1.4',
+    parserVersion: 'conversation-1.5',
   };
 }

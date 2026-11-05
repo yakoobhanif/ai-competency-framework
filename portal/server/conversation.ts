@@ -164,6 +164,32 @@ export async function streamedConversation(html: string): Promise<Turn[] | null>
   return conversationTurns(value);
 }
 
+// Current ChatGPT share pages embed the visible conversation as JSON. Parse it; never execute it.
+export function webMobileConversation(html: string): Turn[] | null {
+  const script = load(html)('script#__WEB_MOBILE_DATA__[type="application/json"]').first();
+  if (!script.length) return null;
+  let data: any;
+  try {
+    data = JSON.parse(script.text());
+  } catch {
+    return null;
+  }
+  const messages = data?.conversation?.messages;
+  if (!Array.isArray(messages) || messages.length > 5000) return null;
+  try {
+    return conversationTurns(
+      messages.map((m: any) => ({
+        role: m?.role,
+        content: typeof m?.content === 'string' ? m.content : [{ type: 'unavailable' }],
+        attachments: Array.isArray(m?.maskedUploads) ? m.maskedUploads.map(() => ({})) : [],
+      })),
+    );
+  } catch (error) {
+    if (error instanceof Error && /exceeds the review limit/.test(error.message)) throw error;
+    return null;
+  }
+}
+
 export function formatTurns(turns: Turn[]): string {
   return turns
     .map(

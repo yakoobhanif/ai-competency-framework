@@ -285,3 +285,47 @@ test('a Claude page saved from the browser keeps its speakers', async () => {
   );
   assert.equal(upload.parseStatus, 'ready');
 });
+
+test('current ChatGPT share pages import from embedded JSON, including masked uploads', async () => {
+  const data = {
+    conversation: {
+      title: 'Memory and attention',
+      messages: [
+        { id: 'u1', role: 'user', content: 'Explain this slide.', maskedUploads: ['file'] },
+        { id: 'a1', role: 'assistant', content: 'The slide covers attention.', renderedHtml: '' },
+        { id: 'u2', role: 'user', content: 'Give me practice exercises.' },
+        {
+          id: 'a2',
+          role: 'assistant',
+          content: 'Try these three questions.',
+          reasoningSummary: 'Worked for 1m',
+        },
+      ],
+    },
+  };
+  const page = `<html><body><script id="__WEB_MOBILE_DATA__" type="application/json">${JSON.stringify(data)}</script><script>throw new Error('must not execute')</script></body></html>`;
+  const check = (turns: { role: string; text: string; unavailableContent?: boolean }[]) => {
+    assert.deepEqual(
+      turns.map((t) => t.role),
+      ['student', 'assistant', 'student', 'assistant'],
+    );
+    assert.equal(
+      turns[0].text,
+      'Explain this slide.\n[Attachment: file; file contents not included]',
+    );
+    assert.equal(turns[0].unavailableContent, true);
+    assert.equal(turns[1].text, 'The slide covers attention.');
+    assert.equal(turns[1].unavailableContent, undefined);
+    assert.equal(turns[3].text, 'Try these three questions.');
+  };
+  const imported = await sharedChatUpload(page, 'https://chatgpt.com/share/x');
+  check(imported.turns);
+  assert.equal(imported.parserVersion, 'conversation-1.5');
+  assert.deepEqual(
+    imported.turns.map((t) => t.id),
+    ['T001', 'T002', 'T003', 'T004'],
+  );
+  const uploaded = await validateUpload('conversation.html', Buffer.from(page), 'learning', null);
+  check(uploaded.turns);
+  assert.equal(uploaded.parseStatus, 'ready');
+});
